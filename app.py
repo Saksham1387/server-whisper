@@ -10,8 +10,8 @@ CORS(app, supports_credentials=True, allow_headers=['Form-data', 'Authorization'
 # Initialize the Whisper model
 model = whisper.load_model("base")
 
-@app.route('/transcribe-audio', methods=['POST'])
-def transcribe_audio():
+@app.route('/', methods=['POST'])
+def transcribe_audio():                
     # Check if the request has an audio file
     if 'audio' not in request.files:
         return jsonify({'error': 'No audio file provided'}), 400
@@ -32,4 +32,4 @@ def transcribe_audio():
     return jsonify({'transcription': result['text']})
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5002)
+    app.run(debug=True, host='0.0.0.0')
